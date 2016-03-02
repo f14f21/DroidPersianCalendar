@@ -2,6 +2,7 @@ package com.byagowi.persiancalendar.util;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -36,7 +37,6 @@ public class UpdateUtils {
     private PersianDate pastDate;
 
     //
-    private NotificationManager mNotificationManager;
     private ExtensionData mExtensionData;
 
     private UpdateUtils(Context context) {
@@ -197,16 +197,13 @@ public class UpdateUtils {
 
         int icon = utils.getDayIconResource(persian.getDayOfMonth());
 
-        if (mNotificationManager == null) {
-            mNotificationManager = (NotificationManager) context
-                    .getSystemService(Context.NOTIFICATION_SERVICE);
-        }
-        if (utils.isNotifyDate()) {
-            mNotificationManager.notify(
+        if (utils.isNotifyDate() && service != null) {
+            service.startForeground(
                     NOTIFICATION_ID,
-                    new NotificationCompat
-                            .Builder(context)
-                            .setPriority(NotificationCompat.PRIORITY_LOW)
+                    new NotificationCompat.Builder(context)
+                            .setPriority(utils.isNotifyDateLessVisible()
+                                    ? NotificationCompat.PRIORITY_MIN
+                                    : NotificationCompat.PRIORITY_DEFAULT)
                             .setOngoing(true)
                             .setSmallIcon(icon)
                             .setWhen(0)
@@ -216,7 +213,7 @@ public class UpdateUtils {
                             .setColor(0xFF607D8B)
                             .build());
         } else {
-            mNotificationManager.cancel(NOTIFICATION_ID);
+            //service.cancel(NOTIFICATION_ID);
         }
 
         mExtensionData = new ExtensionData().visible(true).icon(icon)
@@ -227,6 +224,12 @@ public class UpdateUtils {
 
     public ExtensionData getExtensionData() {
         return mExtensionData;
+    }
+
+    private static Service service;
+
+    public static void setService(Service service) {
+        UpdateUtils.service = service;
     }
 
 }

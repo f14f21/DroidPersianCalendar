@@ -271,6 +271,10 @@ public class Utils {
         return prefs.getBoolean(Constants.PREF_NOTIFY_DATE, Constants.DEFAULT_NOTIFY_DATE);
     }
 
+    public boolean isNotifyDateLessVisible() {
+        return true;
+    }
+
     public int getAthanVolume() {
         return prefs.getInt(Constants.PREF_ATHAN_VOLUME, Constants.DEFAULT_ATHAN_VOLUME);
     }
