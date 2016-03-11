@@ -149,7 +149,7 @@ public class Utils {
 
     public static Utils getInstance(Context context) {
         if (myWeakInstance == null || myWeakInstance.get() == null) {
-            myWeakInstance = new WeakReference<>(new Utils(context.getApplicationContext()));
+            myWeakInstance = new WeakReference<Utils>(new Utils(context.getApplicationContext()));
         }
         return myWeakInstance.get();
     }
@@ -473,7 +473,7 @@ public class Utils {
     }
 
     public List<String> getMonthsNamesListWithOrdinal(AbstractDate date) {
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<String>();
         String[] monthNames = monthsNamesOfCalendar(date);
         for (int i = 0; i < 12; ++i) {
             result.add(monthNames[i] + " / " + formatNumber(i + 1));
@@ -536,7 +536,7 @@ public class Utils {
     }
 
     public List<CityEntity> getAllCities(boolean needsSort) {
-        List<CityEntity> result = new ArrayList<>();
+        List<CityEntity> result = new ArrayList<CityEntity>();
         try {
             JSONObject countries = new JSONObject(readRawResource(R.raw.cities));
 
@@ -619,7 +619,7 @@ public class Utils {
     }
 
     private List<EventEntity> readEventsFromJSON() {
-        List<EventEntity> result = new ArrayList<>();
+        List<EventEntity> result = new ArrayList<EventEntity>();
         try {
             JSONArray days = new JSONObject(readRawResource(R.raw.events)).getJSONArray("events");
 
@@ -647,7 +647,7 @@ public class Utils {
             events = readEventsFromJSON();
         }
 
-        List<EventEntity> result = new ArrayList<>();
+        List<EventEntity> result = new ArrayList<EventEntity>();
         for (EventEntity eventEntity : events) {
             if (eventEntity.getDate().equals(day)) {
                 result.add(eventEntity);
@@ -701,7 +701,7 @@ public class Utils {
     }
 
     public Set<String> commaSeparatedToSet(String commaSeparated) {
-        Set<String> result = new HashSet<>();
+        Set<String> result = new HashSet<String>();
         result.addAll(Arrays.asList(TextUtils.split(commaSeparated, ",")));
         return result;
     }
@@ -876,7 +876,7 @@ public class Utils {
     }
 
     public List<DayEntity> getDays(int offset) {
-        List<DayEntity> days = new ArrayList<>();
+        List<DayEntity> days = new ArrayList<DayEntity>();
         PersianDate persianDate = getToday();
         int month = persianDate.getMonth() - offset;
         month -= 1;

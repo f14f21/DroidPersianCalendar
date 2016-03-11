@@ -60,7 +60,8 @@ public class AthanVolumeDialog extends PreferenceDialogFragmentCompat {
                         mediaPlayer.prepare();
                         mediaPlayer.start();
                     }
-                } catch (IOException | IllegalStateException ignored) {
+                } catch (IOException ignored) {
+                } catch (IllegalStateException ignored) {
                 }
             }
         });

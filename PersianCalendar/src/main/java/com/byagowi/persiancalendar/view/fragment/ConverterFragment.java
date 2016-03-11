@@ -123,7 +123,7 @@ public class ConverterFragment extends Fragment implements
         StringBuilder sb = new StringBuilder();
 
         try {
-            List<String> calendarsTextList = new ArrayList<>();
+            List<String> calendarsTextList = new ArrayList<String>();
             switch (calendarType) {
                 case GEORGIAN:
                     civilDate = new CivilDate(year, month, day);
@@ -196,7 +196,7 @@ public class ConverterFragment extends Fragment implements
 
         int dropdownLayout = R.layout.select_dialog_item_material;
         // years spinner init.
-        List<String> yearsList = new ArrayList<>();
+        List<String> yearsList = new ArrayList<String>();
         int yearDiffRange = 200;
         startingYearOnYearSpinner = date.getYear() - yearDiffRange / 2;
         for (int i = startingYearOnYearSpinner; i < startingYearOnYearSpinner + yearDiffRange; ++i) {
@@ -213,7 +213,7 @@ public class ConverterFragment extends Fragment implements
         //
 
         // days spinner init.
-        List<String> daysList = new ArrayList<>();
+        List<String> daysList = new ArrayList<String>();
         for (int i = 1; i <= 31; ++i) {
             daysList.add(utils.formatNumber(i));
         }

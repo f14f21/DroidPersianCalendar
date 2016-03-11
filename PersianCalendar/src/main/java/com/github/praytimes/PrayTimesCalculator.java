@@ -18,7 +18,7 @@ public class PrayTimesCalculator {
     private static Map<PrayTime, Double> _defaultTimes;
 
     static {
-        _defaultTimes = new HashMap<>();
+        _defaultTimes = new HashMap<PrayTime, Double>();
         _defaultTimes.put(PrayTime.IMSAK, 5d / 24);
         _defaultTimes.put(PrayTime.FAJR, 5d / 24);
         _defaultTimes.put(PrayTime.SUNRISE, 6d / 24);
@@ -68,7 +68,7 @@ public class PrayTimesCalculator {
         _jDate = julian(year, month, day) - _coordinate.getLongitude() / (15d * 24d);
 
         // compute prayer times at given julian date
-        Map<PrayTime, Double> times = new HashMap<>();
+        Map<PrayTime, Double> times = new HashMap<PrayTime, Double>();
         times.put(PrayTime.IMSAK, sunAngleTime(_imsak, _defaultTimes.get(PrayTime.IMSAK), true));
         times.put(PrayTime.FAJR, sunAngleTime(_method.getFajr(), _defaultTimes.get(PrayTime.FAJR), true));
         times.put(PrayTime.SUNRISE, sunAngleTime(riseSetAngle(), _defaultTimes.get(PrayTime.SUNRISE), true));
@@ -85,7 +85,7 @@ public class PrayTimesCalculator {
                 ? times.get(PrayTime.SUNSET) + timeDiff(times.get(PrayTime.SUNSET), times.get(PrayTime.FAJR)) / 2
                 : times.get(PrayTime.SUNSET) + timeDiff(times.get(PrayTime.SUNSET), times.get(PrayTime.SUNRISE)) / 2);
 
-        Map<PrayTime, Clock> result = new HashMap<>();
+        Map<PrayTime, Clock> result = new HashMap<PrayTime, Clock>();
         for (Map.Entry<PrayTime, Double> i : times.entrySet()) {
             result.put(i.getKey(), Clock.fromDouble(i.getValue()));
         }
